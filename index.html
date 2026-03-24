@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. Sarah Khan — General Physician & Internal Medicine</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/duotone/style.css"/>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+:root {
+  --navy: #0F172A;
+  --navy2: #1E293B;
+  --navy3: #334155;
+  --teal: #0F766E;
+  --teal2: #14B8A6;
+  --teal3: #F0FDF9;
+  --white: #FFFFFF;
+  --off: #F8FAFC;
+  --off2: #F1F5F9;
+  --text: #0F172A;
+  --muted: #64748B;
+  --border: rgba(15,23,42,0.08);
+  --border2: rgba(15,23,42,0.14);
+  --px: clamp(24px, 6vw, 96px);
+  --r: 12px;
+  --r2: 20px;
+}
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAVIGATION ─── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--px);
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: all 0.3s ease;
+}
+nav.scrolled {
+  height: 72px;
+  box-shadow: 0 4px 20px rgba(15,23,42,0.08);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+.logo-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--teal3);
+  border: 1px solid rgba(15,118,110,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.logo-mark i {
+  font-size: 22px;
+  color: var(--teal);
+}
+.logo-name {
+  font-family: 'Fraunces', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--navy);
+}
+.logo-tag {
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--muted);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color 0.25s ease;
+}
+.nav-links a:hover {
+  color: var(--navy);
+}
+.nav-appt {
+  background: var(--navy) !important;
+  color: white !important;
+  padding: 12px 26px !important;
+  border-radius: 50px !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  transition: all 0.25s ease !important;
+}
+.nav-appt:hover {
+  background: var(--navy2) !important;
+  transform: translateY(-1px);
+}
+.ham {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+.ham span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--navy);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+.ham.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.ham.open span:nth-child(2) { opacity: 0; }
+.ham.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mob-drawer {
+  display: none;
+  flex-direction: column;
+  position: fixed;
+  top: 80px; left: 0; right: 0; bottom: 0;
+  background: white;
+  z-index: 999;
+  padding: 48px var(--px);
+  gap: 8px;
+  overflow-y: auto;
+}
+.mob-drawer.open { display: flex; }
+.mob-drawer a {
+  font-family: 'Fraunces', serif;
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--navy);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.25s;
+}
+.mob-drawer a:hover { color: var(--teal); }
+.mob-drawer .mob-cta {
+  margin-top: 32px;
+  background: var(--navy);
+  color: white !important;
+  text-align: center;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 18px !important;
+  border-bottom: none;
+}
+@media (max-width: 840px) {
+  .nav-links { display: none; }
+  .ham { display: flex; }
+}
+
+/* ── HERO ─── */
+.hero {
+  min-height: 100vh;
+  padding-top: 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  background: var(--off);
+}
+.hero-dot-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle at 1px 1px, rgba(15,23,42,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+.hero-shape {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 50%;
+  background: var(--navy);
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+  z-index: 1;
+}
+.hero-left {
+  position: relative;
+  z-index: 2;
+  padding: 100px var(--px) 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--teal3);
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 8px 20px;
+  border-radius: 50px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(15,118,110,0.18);
+}
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(48px, 7vw, 84px);
+  font-weight: 400;
+  line-height: 1.05;
+  color: var(--navy);
+  margin-bottom: 32px;
+}
+.hero h1 em {
+  font-style: italic;
+  color: var(--teal);
+}
+.hero-desc {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 520px;
+  margin-bottom: 48px;
+}
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 64px;
+}
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--navy);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 50px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.btn-primary:hover {
+  background: var(--navy2);
+  transform: translateY(-2px);
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--navy);
+  padding: 16px 32px;
+  border-radius: 50px;
+  border: 1.5px solid var(--border2);
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+.btn-outline:hover {
+  border-color: var(--teal);
+  background: var(--teal3);
+  transform: translateY(-2px);
+}
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.hstat-num {
+  font-family: 'Fraunces', serif;
+  font-size: 42px;
+  font-weight: 500;
+  color: var(--navy);
+  line-height: 1;
+}
+.hstat-num span {
+  color: var(--teal);
+  font-size: 26px;
+}
+.hstat-lbl {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.hero-right {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 40px 0;
+}
+.doctor-portrait {
+  width: 360px;
+  height: 460px;
+  border-radius: 180px 180px 0 0;
+  background: var(--navy3);
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.doctor-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+.stat-card-float {
+  position: absolute;
+  background: white;
+  border-radius: var(--r);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 40px rgba(15,23,42,0.1);
+  padding: 16px 22px;
+}
+.scf-1 { top: 100px; left: -40px; }
+.scf-2 { bottom: 60px; right: -40px; text-align: center; }
+.scf-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.scf-val {
+  font-family: 'Fraunces', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--navy);
+}
+.scf-tag {
+  font-size: 12px;
+  color: var(--teal);
+  font-weight: 500;
+  margin-top: 4px;
+}
+.avail-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--teal2);
+  display: inline-block;
+  margin-right: 8px;
+  animation: pulse 2s infinite ease-in-out;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+@media (max-width: 1100px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero-shape { display: none; }
+  .hero-right { display: none; }
+  .hero-left { padding: 80px var(--px) 120px; text-align: center; }
+  .hero h1, .hero-desc, .hero-btns, .hero-stats { margin-left: auto; margin-right: auto; }
+  .hero-stats { justify-content: center; }
+}
+
+/* ── INFO BAR ─── */
+.info-bar {
+  background: var(--navy);
+  padding: 28px var(--px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.ibar-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ibar-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.ibar-icon i {
+  font-size: 20px;
+  color: var(--teal2);
+}
+.ibar-lbl {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.ibar-val {
+  font-size: 15px;
+  font-weight: 500;
+  color: white;
+}
+
+/* ── SECTION BASE ─── */
+.sec {
+  padding: clamp(80px, 10vw, 140px) var(--px);
+}
+.sec-white { background: var(--white); }
+.sec-off { background: var(--off); }
+.sec-navy { background: var(--navy); }
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.eyebrow-line {
+  width: 32px;
+  height: 3px;
+  background: var(--teal);
+  border-radius: 2px;
+}
+.eyebrow-txt {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(36px, 5.5vw, 64px);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+.sec-title-white { color: white; }
+.sec-sub {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--muted);
+  max-width: 580px;
+  margin-bottom: 64px;
+}
+.sec-sub-white { color: rgba(255,255,255,0.7); }
+
+/* ── SPECIALTIES ─── */
+.spec-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 36px 28px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.spec-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal), var(--teal2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.spec-card:hover {
+  border-color: rgba(15,118,110,0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 24px 56px rgba(15,23,42,0.1);
+}
+.spec-card:hover::before { transform: scaleX(1); }
+.spec-card:hover .spec-icon { background: var(--teal); }
+.spec-card:hover .spec-icon svg { stroke: white; }
+
+.spec-icon {
+  width: 58px; height: 58px;
+  background: var(--teal3);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+  transition: background 0.35s ease;
+  border: 1px solid rgba(15,118,110,0.12);
+}
+.spec-icon svg {
+  width: 26px; height: 26px;
+  stroke: var(--teal);
+  stroke-width: 1.75;
+  transition: stroke 0.35s ease;
+}
+.spec-name {
+  font-family: 'Fraunces', serif;
+  font-size: 19px; font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.spec-desc {
+  font-size: 14px; font-weight: 300;
+  line-height: 1.75;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+.spec-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--teal);
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.spec-arrow svg { width: 14px; height: 14px; stroke: var(--teal); stroke-width: 2; }
+.spec-card:hover .spec-arrow { opacity: 1; transform: translateX(0); }
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.spec-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 32px 28px;
+  transition: all 0.3s ease;
+}
+.spec-card:hover {
+  border-color: rgba(15,118,110,0.25);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 48px rgba(15,23,42,0.1);
+}
+.spec-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--teal3);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+.spec-icon i {
+  font-size: 26px;
+  color: var(--teal);
+}
+.spec-name {
+  font-family: 'Fraunces', serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.spec-desc {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--muted);
+}
+
+/* ── ABOUT ─── */
+.about-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 960px) { .about-wrap { grid-template-columns: 1fr; gap: 60px; } }
+.about-img-wrap { position: relative; }
+.about-img {
+  width: 100%;
+  aspect-ratio: 4/5;
+  border-radius: var(--r2);
+  overflow: hidden;
+  background: var(--off2);
+  border: 1px solid var(--border);
+}
+.about-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.about-img-badge {
+  position: absolute;
+  bottom: -24px;
+  right: -24px;
+  background: var(--teal);
+  color: white;
+  border-radius: var(--r);
+  padding: 20px 28px;
+  box-shadow: 0 12px 48px rgba(15,118,110,0.3);
+  text-align: center;
+}
+.aib-num {
+  font-family: 'Fraunces', serif;
+  font-size: 42px;
+  font-weight: 600;
+  line-height: 1;
+}
+.aib-lbl {
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.9;
+  margin-top: 4px;
+}
+.about-body {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-bottom: 40px;
+}
+.cred-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-bottom: 48px;
+}
+.cred-card {
+  background: var(--off);
+  border-radius: var(--r);
+  padding: 18px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.cred-val {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--navy);
+}
+.cred-lbl {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ── PROCESS ─── */
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  position: relative;
+}
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: var(--border2);
+  z-index: 0;
+}
+@media (max-width: 900px) {
+  .process-steps::before { display: none; }
+}
+.pstep {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+.pstep-num {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--teal);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--teal);
+  transition: all 0.3s;
+}
+.pstep:hover .pstep-num {
+  background: var(--teal);
+  color: white;
+}
+.pstep-title {
+  font-family: 'Fraunces', serif;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+.pstep-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.7;
+}
+/*
+*/
+
+/* ── CONDITIONS ─── */
+.cond-wrap {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  align-items: start;
+}
+@media (max-width: 960px) { .cond-wrap { grid-template-columns: 1fr; } }
+.cond-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+.cond-pill {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 22px 18px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.cond-pill::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--teal2));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.cond-pill:hover {
+  background: rgba(15,118,110,0.15);
+  border-color: rgba(20,184,166,0.4);
+  transform: translateY(-4px);
+}
+.cond-pill:hover::after { transform: scaleX(1); }
+.cond-pill:hover .cond-icon-wrap { background: var(--teal); }
+.cond-pill:hover .cond-icon-wrap svg { color: white !important; }
+
+.cond-icon-wrap {
+  width: 42px; height: 42px;
+  border-radius: 11px;
+  background: rgba(20,184,166,0.15);
+  border: 1px solid rgba(20,184,166,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.3s ease;
+}
+.cond-pill-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.3;
+}
+.cond-pill:hover {
+  background: rgba(15,118,110,0.18);
+  border-color: var(--teal2);
+  transform: translateY(-3px);
+}
+.cond-pill i {
+  font-size: 24px;
+  color: var(--teal2);
+  margin-bottom: 12px;
+  display: block;
+}
+.cond-pill-name {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.9);
+}
+
+/* ── REVIEWS ─── */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 28px;
+}
+.rev-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: 32px;
+  transition: all 0.3s ease;
+}
+.rev-card:hover {
+  border-color: rgba(15,118,110,0.22);
+  box-shadow: 0 12px 40px rgba(15,23,42,0.08);
+}
+.rev-stars {
+  color: #F59E0B;
+  font-size: 14px;
+  letter-spacing: 3px;
+  margin-bottom: 16px;
+}
+.rev-text {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text);
+  font-style: italic;
+  margin-bottom: 24px;
+}
+.rev-author {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.rev-av {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--teal3);
+  border: 1px solid rgba(15,118,110,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--teal);
+  flex-shrink: 0;
+}
+.rev-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+}
+.rev-type {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ── APPOINTMENT ─── */
+.appt-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 960px) {
+  .appt-wrap { grid-template-columns: 1fr; gap: 60px; }
+}
+.appt-feats {
+  list-style: none;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.af {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.af-icon {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 14px;
+  background: var(--teal3);
+  border: 1px solid rgba(15,118,110,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+/* .af:hover .af-icon {
+  background: var(--teal);
+  
+  transform: scale(1.08);
+} */
+.af:hover .af-icon i:hover {
+  color: white !important;
+}
+.af-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.af-desc {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.65;
+}
+.af-icon i {
+  font-size: 20px;
+  color: var(--teal);
+}
+
+.af-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 6px;
+}
+.af-desc {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--muted);
+}
+.appt-form {
+  background: var(--off);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  padding: clamp(36px, 5vw, 52px);
+}
+.form-head {
+  font-family: 'Fraunces', serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+}
+.frow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 600px) { .frow { grid-template-columns: 1fr; } }
+.fg {
+  margin-bottom: 20px;
+}
+.fg label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.fg input, .fg select, .fg textarea {
+  width: 100%;
+  background: white;
+  border: 1px solid var(--border2);
+  border-radius: 12px;
+  padding: 14px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.25s;
+}
+.fg input:focus, .fg select:focus {
+  border-color: var(--teal);
+}
+.btn-submit {
+  width: 100%;
+  background: var(--navy);
+  color: white;
+  padding: 18px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 12px;
+  transition: all 0.25s;
+}
+.btn-submit:hover {
+  background: var(--navy2);
+  transform: translateY(-2px);
+}
+
+/* ── FOOTER ─── */
+footer {
+  background: var(--navy);
+  padding: clamp(80px, 10vw, 120px) var(--px) 60px;
+  color: white;
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+@media (max-width: 960px) { .footer-top { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .footer-top { grid-template-columns: 1fr; } }
+.footer-brand {
+  font-family: 'Fraunces', serif;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.footer-desc {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.6);
+  max-width: 320px;
+  margin-bottom: 32px;
+}
+.footer-soc {
+  display: flex;
+  gap: 12px;
+}
+.soc {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+.soc:hover {
+  border-color: var(--teal2);
+  transform: translateY(-3px);
+}
+.ft-col-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 20px;
+}
+.ft-links a {
+  font-size: 15px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.7);
+  text-decoration: none;
+  transition: color 0.25s;
+  display: block;
+  margin-bottom: 12px;
+}
+.ft-links a:hover { color: white; }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.ft-credit {
+  color: var(--teal2);
+  text-decoration: none;
+}
+.ft-credit:hover { text-decoration: underline; }
+
+/* ── FLOATING WHATSAPP ─── */
+.float-wa {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  z-index: 999;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(37,211,102,0.3);
+  transition: all 0.3s ease;
+}
+.float-wa:hover {
+  transform: scale(1.12);
+  box-shadow: 0 12px 48px rgba(37,211,102,0.4);
+}
+.float-wa svg { width: 28px; height: 28px; fill: white; }
+
+/* ── MOBILE BOTTOM BAR ─── */
+.mob-bar {
+  display: none;
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 998;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  padding: 16px 24px;
+  gap: 12px;
+}
+@media (max-width: 640px) {
+  .mob-bar { display: flex; }
+  .float-wa { bottom: 96px; right: 24px; }
+}
+.mob-call, .mob-appt {
+  flex: 1;
+  padding: 14px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.mob-call {
+  background: var(--off);
+  color: var(--navy);
+  border: 1px solid var(--border);
+}
+.mob-appt {
+  background: var(--navy);
+  color: white;
+}
+
+/* ── TOAST ─── */
+.toast {
+  position: fixed;
+  bottom: 110px;
+  right: 32px;
+  z-index: 1000;
+  background: var(--navy);
+  color: white;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: all 0.4s ease;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.toast-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #25D366;
+  flex-shrink: 0;
+}
+
+/* ── SCROLL REVEAL ─── */
+.sr {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.sr.vis {
+  opacity: 1;
+  transform: translateY(0);
+}
+.sr-d1 { transition-delay: 0.15s; }
+.sr-d2 { transition-delay: 0.3s; }
+.sr-d3 { transition-delay: 0.45s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="logo" href="#">
+  <div class="logo-mark" style="background: var(--teal3); border: 1px solid rgba(15,118,110,0.2);">
+    <i class="ph-duotone ph-stethoscope" style="font-size: 24px; color: var(--teal);"></i>
+  </div>
+  <div>
+    <div class="logo-name">Dr. Sarah Khan</div>
+    <div class="logo-tag">General Physician & Internal Medicine</div>
+  </div>
+</a>
+  <ul class="nav-links">
+    <li><a href="#specialties">Specialties</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#conditions">Conditions</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#appointment" class="nav-appt">Book Appointment</a></li>
+  </ul>
+  <button class="ham" id="ham"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- MOBILE DRAWER -->
+<div class="mob-drawer" id="mob-drawer">
+  <a href="#specialties" onclick="closeNav()">Specialties</a>
+  <a href="#about" onclick="closeNav()">About</a>
+  <a href="#conditions" onclick="closeNav()">Conditions</a>
+  <a href="#reviews" onclick="closeNav()">Reviews</a>
+  <a href="#appointment" class="mob-cta" onclick="closeNav()">Book Appointment</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-dot-grid"></div>
+  <div class="hero-shape"></div>
+  <div class="hero-left">
+    <div class="hero-badge sr"><div class="hero-badge-dot"></div>Now Accepting New Patients</div>
+    <h1 class="sr">Your Health,<br>Our <em>Priority</em></h1>
+    <p class="hero-desc sr">Compassionate, evidence-based primary care for you and your family. From preventive health to chronic disease management — delivered with clarity and care.</p>
+    <div class="hero-btns sr">
+      <a href="#appointment" class="btn-primary">Book Consultation</a>
+      <a href="https://wa.me/923067292338" class="btn-outline">WhatsApp Chat</a>
+    </div>
+    <div class="hero-stats sr">
+      <div class="hstat">
+        <div class="hstat-num">1,200<span>+</span></div>
+        <div class="hstat-lbl">Patients Treated</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">15<span>Years</span></div>
+        <div class="hstat-lbl">Clinical Experience</div>
+      </div>
+      <div class="hstat">
+        <div class="hstat-num">4.9<span>★</span></div>
+        <div class="hstat-lbl">Patient Rating</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right sr">
+    <div style="position:relative;">
+      <div class="doctor-portrait">
+        <!-- Replace with real photo when available -->
+        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dr. Sarah Khan">
+      </div>
+      <div style="margin-left:-50px ;" class="stat-card-float scf-1">
+        <div class="scf-label">Availability</div>
+        <div class="scf-val"><span class="avail-dot"></span>Today</div>
+        <div class="scf-tag">Mon–Sat 9:00 – 20:00</div>
+      </div>
+      <div class="stat-card-float scf-2">
+        <div class="scf-label">Satisfaction</div>
+        <div class="scf-val">98%</div>
+        <div class="scf-tag">Patient approval</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INFO BAR -->
+<div class="info-bar">
+  <div class="ibar-item">
+    <div class="ibar-icon"><i class="ph-duotone ph-map-pin"></i></div>
+    <div>
+      <div class="ibar-lbl">Location</div>
+      <div class="ibar-val">Gulberg III, Lahore</div>
+    </div>
+  </div>
+  <div class="ibar-item">
+    <div class="ibar-icon"><i class="ph-duotone ph-clock"></i></div>
+    <div>
+      <div class="ibar-lbl">Clinic Hours</div>
+      <div class="ibar-val">Mon – Sat: 9:00 am – 8:00 pm</div>
+    </div>
+  </div>
+  <div class="ibar-item">
+    <div class="ibar-icon"><i class="ph-duotone ph-phone"></i></div>
+    <div>
+      <div class="ibar-lbl">Phone</div>
+      <div class="ibar-val">03067292338</div>
+    </div>
+  </div>
+  <div class="ibar-item">
+    <div class="ibar-icon"><i class="ph-duotone ph-video-camera"></i></div>
+    <div>
+      <div class="ibar-lbl">Video Consult</div>
+      <div class="ibar-val">Available · PKR 1,500</div>
+    </div>
+  </div>
+</div>
+
+<!-- SPECIALTIES -->
+<section class="sec sec-off" id="specialties">
+  <div class="sr">
+    <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Areas of Expertise</span></div>
+    <h2 class="sec-title">Clinical Specialisation</h2>
+    <p class="sec-sub">Comprehensive internal medicine with focus on prevention, accurate diagnosis, and long-term wellness.</p>
+  </div>
+<div class="spec-grid sr sr-d1">
+
+  <div class="spec-card">
+    <div class="spec-icon">
+      <i data-lucide="heart-pulse" style="width:26px;height:26px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div class="spec-name">Cardiology & Hypertension</div>
+    <p class="spec-desc">Blood pressure control, cardiac risk evaluation, ECG reading & follow-up care.</p>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-icon">
+      <i data-lucide="activity" style="width:26px;height:26px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div class="spec-name">Diabetes & Metabolic Care</div>
+    <p class="spec-desc">Type 1 & 2 diabetes, insulin therapy, HbA1c optimisation, metabolic syndrome.</p>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-icon">
+      <i data-lucide="wind" style="width:26px;height:26px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div class="spec-name">Respiratory Medicine</div>
+    <p class="spec-desc">Asthma, COPD, allergies, chest infections & pulmonary function monitoring.</p>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-icon">
+      <i data-lucide="thermometer" style="width:26px;height:26px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div class="spec-name">Fever & Infectious Diseases</div>
+    <p class="spec-desc">Typhoid, dengue, malaria, viral fevers & post-infection recovery plans.</p>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-icon">
+      <i data-lucide="pill" style="width:26px;height:26px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div class="spec-name">Gastroenterology</div>
+    <p class="spec-desc">GERD, IBS, hepatitis, fatty liver, H. pylori & digestive health.</p>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-icon">
+      <i data-lucide="brain" style="width:26px;height:26px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div class="spec-name">Headache & Neurology Basics</div>
+    <p class="spec-desc">Migraine, tension headache, vertigo & initial neurological evaluation.</p>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-icon">
+      <i data-lucide="bone" style="width:26px;height:26px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div class="spec-name">Rheumatology & Joint Health</div>
+    <p class="spec-desc">Osteoarthritis, rheumatoid arthritis, gout & joint pain management.</p>
+  </div>
+
+  <div class="spec-card">
+    <div class="spec-icon">
+      <i data-lucide="shield-check" style="width:26px;height:26px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div class="spec-name">Preventive & Wellness Medicine</div>
+    <p class="spec-desc">Annual health checks, vaccinations, lifestyle modification & screening.</p>
+  </div>
+
+</div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec sec-white" id="about">
+  <div class="about-wrap">
+    <div class="about-img-wrap sr">
+      <div class="about-img">
+        <!-- Replace with real photo -->
+        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dr. Sarah Khan">
+      </div>
+      <div class="about-img-badge">
+        <div class="aib-num">15+</div>
+        <div class="aib-lbl">Years of Experience</div>
+      </div>
+    </div>
+    <div class="about-right sr sr-d1">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">About Dr. Sarah</span></div>
+      <h2 class="sec-title">Medicine Practised<br>with <em>Purpose</em></h2>
+      <p class="about-body">Dr. Sarah Khan is a Lahore-based consultant physician in Internal Medicine with more than 15 years of clinical experience. She completed her MBBS from King Edward Medical University and FCPS in Internal Medicine from the College of Physicians and Surgeons Pakistan.</p>
+      <p class="about-body">Her philosophy is simple: excellent medical care begins with deep listening, thorough evaluation, and shared decision-making. She integrates the latest evidence-based guidelines with genuine empathy to provide treatment that respects the whole person.</p>
+      <div class="cred-grid">
+        <div class="cred-card"><div class="cred-val">MBBS</div><div class="cred-lbl">KEMU Lahore</div></div>
+        <div class="cred-card"><div class="cred-val">FCPS</div><div class="cred-lbl">Internal Medicine</div></div>
+        <div class="cred-card"><div class="cred-val">MRCP</div><div class="cred-lbl">UK (Part 1 & 2)</div></div>
+      </div>
+      <a href="#appointment" class="btn-primary">Schedule a Consultation</a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS / HOW IT WORKS -->
+<section class="sec sec-off">
+  <div class="sr" style="text-align:center; margin-bottom:80px;">
+    <div class="eyebrow" style="justify-content:center;">
+      <div class="eyebrow-line"></div>
+      <span class="eyebrow-txt">Your Journey With Us</span>
+    </div>
+    <h2 class="sec-title" style="margin-bottom:16px;">Four Simple Steps</h2>
+    <p class="sec-sub" style="margin:0 auto; max-width:640px;">Clear, efficient, and patient-centered from first contact to follow-up care.</p>
+  </div>
+  <div class="process-steps sr sr-d1">
+    <div class="pstep">
+      <div class="pstep-num">1</div>
+      <div class="pstep-title">Easy Booking</div>
+      <p class="pstep-desc">Use the form, call, or WhatsApp to select a convenient date and time.</p>
+    </div>
+    <div class="pstep">
+      <div class="pstep-num">2</div>
+      <div class="pstep-title">Thorough Consultation</div>
+      <p class="pstep-desc">Detailed history, focused examination, and necessary investigations discussed in detail.</p>
+    </div>
+    <div class="pstep">
+      <div class="pstep-num">3</div>
+      <div class="pstep-title">Clear Plan</div>
+      <p class="pstep-desc">Accurate diagnosis + personalised treatment explained in simple, understandable language.</p>
+    </div>
+    <div class="pstep">
+      <div class="pstep-num">4</div>
+      <div class="pstep-title">Continued Support</div>
+      <p class="pstep-desc">WhatsApp follow-up, repeat prescriptions, and scheduled reviews as needed.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONDITIONS -->
+<section class="sec sec-navy" id="conditions">
+  <div class="cond-wrap">
+    <div class="cond-left sr">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Frequently Managed</span></div>
+      <h2 class="sec-title sec-title-white">Common Medical Conditions</h2>
+      <p class="sec-sub sec-sub-white">This is not an exhaustive list — feel free to contact us for any health concern.</p>
+      <a href="#appointment" class="btn-primary" style="margin-top:40px; background:var(--teal);">Book Your Visit</a>
+    </div>
+    <div class="cond-grid sr sr-d1">
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="heart-pulse" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">High Blood Pressure</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="droplets" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Diabetes Mellitus</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="thermometer" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Typhoid Fever</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="bug" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Dengue Fever</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="wind" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Asthma & Allergies</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="flame" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Acid Reflux / GERD</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="brain" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Chronic Headaches</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="bone" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Arthritis & Joint Pain</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="activity" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Thyroid Disorders</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="syringe" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Anaemia</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="flask-conical" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Urinary Infections</div>
+  </div>
+
+  <div class="cond-pill">
+    <div class="cond-icon-wrap">
+      <i data-lucide="shield-check" style="width:20px;height:20px;color:var(--teal2);stroke-width:1.75;"></i>
+    </div>
+    <div class="cond-pill-name">Preventive Health</div>
+  </div>
+
+</div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec sec-off" id="reviews">
+  <div class="sr" style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:32px; margin-bottom:64px;">
+    <div>
+      <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Patient Feedback</span></div>
+      <h2 class="sec-title" style="margin-bottom:8px;">What Our Patients Say</h2>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-family:'Fraunces',serif; font-size:64px; font-weight:400; color:var(--navy); line-height:1;">4.9</div>
+      <div style="color:#F59E0B; font-size:16px; letter-spacing:4px; margin:8px 0;">★★★★★</div>
+      <div style="font-size:14px; color:var(--muted);">Based on 140+ verified reviews</div>
+    </div>
+  </div>
+  <div class="reviews-grid sr sr-d1">
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">After struggling with unexplained fatigue for years, Dr. Sarah finally diagnosed my thyroid issue correctly. Her patience, detailed explanations and follow-up have been exceptional.</p>
+      <div class="rev-author">
+        <div class="rev-av">ZA</div>
+        <div>
+          <div class="rev-name">Zara Ahmed</div>
+          <div class="rev-type">Thyroid Management · 4 months ago</div>
+        </div>
+      </div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">My diabetes control has improved dramatically under Dr. Sarah’s care. She adjusted medications carefully, explained everything clearly, and is always available on WhatsApp for questions.</p>
+      <div class="rev-author">
+        <div class="rev-av">MK</div>
+        <div>
+          <div class="rev-name">Muhammad Kamran</div>
+          <div class="rev-type">Type 2 Diabetes · Ongoing</div>
+        </div>
+      </div>
+    </div>
+    <div class="rev-card">
+      <div class="rev-stars">★★★★★</div>
+      <p class="rev-text">Severe migraines were ruining my life. Within weeks of starting her treatment plan I felt significant relief. Highly professional, knowledgeable and caring doctor.</p>
+      <div class="rev-author">
+        <div class="rev-av">RN</div>
+        <div>
+          <div class="rev-name">Rabia Nawaz</div>
+          <div class="rev-type">Migraine Treatment · 6 weeks ago</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section class="sec sec-white" id="appointment">
+  <div class="appt-wrap">
+    <div class="sr">
+      <div class="eyebrow"><div class="eyebrow-line"></div><span class="eyebrow-txt">Make an Appointment</span></div>
+      <h2 class="sec-title">Book Your Visit Today</h2>
+      <p class="sec-sub" style="margin-bottom:0;">Fill out the form — we usually confirm within 1–2 hours via WhatsApp or call.</p>
+      <ul class="appt-feats">
+
+  <li class="af">
+    <div class="af-icon">
+      <i class="booking" data-lucide="shield-check" style="width:22px;height:22px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div>
+      <div class="af-title">Transparent Fees</div>
+      <div class="af-desc">No hidden charges — full fee discussed upfront before every visit.</div>
+    </div>
+  </li>
+
+  <li class="af">
+    <div class="af-icon">
+      <i data-lucide="video" style="width:22px;height:22px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div>
+      <div class="af-title">Video Consult Option</div>
+      <div class="af-desc">Convenient remote appointments via WhatsApp or Zoom from anywhere.</div>
+    </div>
+  </li>
+
+  <li class="af">
+    <div class="af-icon">
+      <i data-lucide="calendar-check" style="width:22px;height:22px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div>
+      <div class="af-title">Same / Next Day Slots</div>
+      <div class="af-desc">Urgent appointments often available — call or WhatsApp us directly.</div>
+    </div>
+  </li>
+
+  <li class="af">
+    <div class="af-icon">
+      <i data-lucide="heart-handshake" style="width:22px;height:22px;color:var(--teal);stroke-width:1.75;"></i>
+    </div>
+    <div>
+      <div class="af-title">Holistic Approach</div>
+      <div class="af-desc">We treat the whole person — not just the symptoms — with empathy and care.</div>
+    </div>
+  </li>
+
+</ul>
+    </div>
+
+    <div class="appt-form sr sr-d2">
+      <div class="form-head">Request Appointment</div>
+      <div class="frow">
+        <div class="fg">
+          <label><i class="ph-duotone ph-user"></i> Full Name</label>
+          <input type="text" placeholder="Your full name" id="fn">
+        </div>
+        <div class="fg">
+          <label><i class="ph-duotone ph-phone"></i> Phone Number</label>
+          <input type="tel" placeholder="03067292338" id="fp">
+        </div>
+      </div>
+      <div class="fg">
+        <label><i class="ph-duotone ph-stethoscope"></i> Reason for Visit</label>
+        <select id="fs">
+          <option value="">Please select...</option>
+          <option>General / Annual Checkup</option>
+          <option>Diabetes / Blood Sugar Issues</option>
+          <option>High Blood Pressure / Heart</option>
+          <option>Fever / Infection</option>
+          <option>Breathing / Chest Problem</option>
+          <option>Stomach / Digestive Issue</option>
+          <option>Joint Pain / Arthritis</option>
+          <option>Thyroid / Hormonal Problem</option>
+          <option>Headache / Migraine</option>
+          <option>Other / Not Sure</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label><i class="ph-duotone ph-chat-circle"></i> Consultation Type</label>
+        <select id="fc">
+          <option value="">Select type...</option>
+          <option>In-Person Clinic Visit</option>
+          <option>Video Consultation (PKR 1,500)</option>
+        </select>
+      </div>
+      <div class="frow">
+        <div class="fg">
+          <label><i class="ph-duotone ph-calendar"></i> Preferred Date</label>
+          <input type="date" id="fd">
+        </div>
+        <div class="fg">
+          <label><i class="ph-duotone ph-clock"></i> Preferred Time</label>
+          <select id="ft">
+            <option value="">Any available time</option>
+            <option>Morning (9:00 – 13:00)</option>
+            <option>Afternoon (13:00 – 17:00)</option>
+            <option>Evening (17:00 – 20:00)</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn-submit" onclick="sendAppt()">
+        <i class="ph-duotone ph-paper-plane-tilt"></i>
+        Send via WhatsApp
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand">Dr. Sarah Khan</div>
+      <p class="footer-desc">Trusted internal medicine & primary care in Lahore. Evidence-based treatment delivered with compassion and clarity.</p>
+      <div style="color: var(--teal2);" class="footer-soc">
+        <a style="color: var(--teal2);" href="#" class="soc"><i style="color: var(--teal2);" class="ph-duotone ph-facebook-logo"></i></a>
+        <a style="color: var(--teal2);" href="#" class="soc"><i style="color: var(--teal2);" class="ph-duotone ph-instagram-logo"></i></a>
+        <a style="color: var(--teal2);" href="#" class="soc"><i style="color: var(--teal2);" class="ph-duotone ph-google-logo"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-title">Services</div>
+      <ul class="ft-links">
+        <li><a href="#specialties">Diabetes Care</a></li>
+        <li><a href="#specialties">Hypertension</a></li>
+        <li><a href="#specialties">Respiratory Health</a></li>
+        <li><a href="#specialties">Preventive Checkups</a></li>
+        <li><a href="#appointment">Video Consultation</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-title">Clinic</div>
+      <ul class="ft-links">
+        <li><a href="#about">About Dr. Sarah</a></li>
+        <li><a href="#reviews">Patient Reviews</a></li>
+        <li><a href="#">Health Blog</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#appointment">Appointments</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="ft-col-title">Contact</div>
+      <ul class="ft-links">
+        <li><a href="#">Gulberg III, Lahore</a></li>
+        <li><a href="tel:+923001234567">03067292338</a></li>
+        <li><a href="#">Mon–Sat 9:00 am – 8:00 pm</a></li>
+        <li><a href="https://wa.me/923001234567">WhatsApp</a></li>
+        <li><a href="#">Get Directions</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Dr. Sarah Khan Clinic. All rights reserved.</span>
+    <a href="#" class="ft-credit">Website by Ali.dev</a>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<a href="https://wa.me/923001234567" class="float-wa" target="_blank" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- MOBILE BOTTOM BAR -->
+<div class="mob-bar">
+  <a href="tel:+923001234567" class="mob-call"><i class="ph-duotone ph-phone"></i> Call Now</a>
+  <a href="#appointment" class="mob-appt"><i class="ph-duotone ph-calendar"></i> Book Now</a>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toast">
+  <div class="toast-dot"></div>
+  <span>Opening WhatsApp...</span>
+</div>
+
+<script>
+// Mobile menu
+const ham = document.getElementById('ham');
+const drawer = document.getElementById('mob-drawer');
+ham.addEventListener('click', () => {
+  ham.classList.toggle('open');
+  drawer.classList.toggle('open');
+  document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+});
+function closeNav() {
+  ham.classList.remove('open');
+  drawer.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('vis');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.sr').forEach(el => observer.observe(el));
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// WhatsApp form
+function sendAppt() {
+  const name = document.getElementById('fn').value.trim() || 'Patient';
+  const phone = document.getElementById('fp').value.trim() || '-';
+  const reason = document.getElementById('fs').value || 'General Checkup';
+  const type = document.getElementById('fc').value || 'In-Clinic';
+  const date = document.getElementById('fd').value || 'Flexible';
+  const time = document.getElementById('ft').value || 'Any time';
+
+  const message = `Hello Dr. Sarah Khan,\n\nI would like to book an appointment.\n\nName: ${name}\nPhone: ${phone}\nReason: ${reason}\nType: ${type}\nPreferred Date: ${date}\nPreferred Time: ${time}\n\nThank you.`;
+
+  const toast = document.getElementById('toast');
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+
+  window.open(`https://wa.me/923067292338?text=${encodeURIComponent(message)}`, '_blank');
+}
+</script>
+<!-- <script src="https://unpkg.com/@phosphor-icons/web"></script> -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>lucide.createIcons();</script>
+<script>lucide.createIcons();</script>
+</body>
+</html>
